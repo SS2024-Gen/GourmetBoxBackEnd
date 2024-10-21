@@ -1,0 +1,54 @@
+resumen compra
+cliente
+suscripcion
+
+
+platos
+
+CREATE TABLE producto(
+	idProducto INT PRIMARY KEY AUTO_INCREMENT,
+	nombreProducto VARCHAR(50) NOT NULL,
+	descripcionProducto VARCHAR(200) NOT NULL,
+	categoria VARCHAR(15) NOT NULL,
+	imgProducto VARCHAR(50) NOT NULL,
+	precioProducto DECIMAL(20,2) NOT NULL    
+); 
+
+CREATE TABLE productosagregados (
+	idProductosAgregados INT PRIMARY KEY AUTO_INCREMENT,
+	usuarioId INT(10) NOT NULL,
+	productoId INT(10) NOT NULL,
+	cantidadProducto INT(10) NOT NULL,
+	subtotal DECIMAL(20,2) NOT NULL,
+	FOREIGN KEY (usuarioId) REFERENCES usuario(idUsuario),
+	FOREIGN KEY (productoId) REFERENCES producto(idProducto)
+);
+
+CREATE TABLE suscripcion(
+    idSuscripcion INT PRIMARY KEY AUTO_INCREMENT,
+    nombrePlan VARCHAR(100) NOT NULL,
+    descripcionPlan VARCHAR(200) NOT NULL,
+    precio DECIMAL(10,2) NOT NULL
+);
+
+CREATE TABLE usuario(
+    idUsuario INT PRIMARY KEY AUTO_INCREMENT,
+    nombreUsuario VARCHAR(50) NOT NULL,
+    userName VARCHAR(50) NOT NULL,
+    contraseña VARCHAR(200) NOT NULL,
+    correo VARCHAR(50) NOT NULL,
+    telefono VARCHAR(50) NOT NULL,
+    esAdmistrador TINYINT NOT NULL,
+    suscripcionId INT,
+
+    FOREIGN KEY (suscripcionId) REFERENCES suscripcion(idSuscripcion)
+);
+
+CREATE TABLE resumenCompra(
+    idResumenCompra INT PRIMARY KEY AUTO_INCREMENT,
+    usuarioId INT NOT NULL,
+    precioTotalProductos DOUBLE NOT NULL,
+    precioDomicilio DECIMAL(10,2) NOT NULL,
+    precioTotal DOUBLE NOT NULL,
+    FOREIGN KEY (usuarioId) REFERENCES cliente(idCliente)
+);
