@@ -44,3 +44,7 @@ CREATE TABLE productosagregados (
 	FOREIGN KEY (usuarioId) REFERENCES usuario(idUsuario),
 	FOREIGN KEY (productoId) REFERENCES producto(idProducto)
 );
+
+
+
+
